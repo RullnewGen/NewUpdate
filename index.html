@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101611">
+  <title>Pocket Toolkit RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark">✦</div>
+      <div class="brand-copy"><span class="eyebrow">ADVENTURER'S KIT</span><strong>Pocket Toolkit <em>RPG</em></strong></div>
+      <button id="themeBtn" class="icon-btn" aria-label="Ganti tema" title="Ganti tema">☼</button>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div class="hero-top">
+          <div>
+            <span class="eyebrow">YOUR JOURNEY</span>
+            <h1 id="greeting">Ready, adventurer?</h1>
+            <p class="muted">Alat kecil. Progress nyata.</p>
+          </div>
+          <div class="level-badge"><span>LVL</span><strong id="levelNum">1</strong></div>
+        </div>
+        <div class="xp-row"><span id="xpLabel">0 / 100 XP</span><span id="rankLabel">Rookie</span></div>
+        <div class="xp-track"><div id="xpBar" class="xp-fill"></div></div>
+        <div class="hero-stats">
+          <div><strong id="completedCount">0</strong><span>Quest done</span></div>
+          <div><strong id="streakCount">0</strong><span>Day streak*</span></div>
+          <div><strong id="achievementCount">0</strong><span>Achievements</span></div>
+        </div>
+        <p class="tiny muted">*Streak dihitung dari hari ketika quest diselesaikan.</p>
+      </section>
+
+      <section class="section-head">
+        <div><span class="eyebrow">TOOLBELT</span><h2>Choose your tool</h2></div>
+        <span class="online-pill"><i></i> Local-first</span>
+      </section>
+
+      <nav class="tool-grid" aria-label="Daftar alat">
+        <button class="tool-card active" data-view="ram"><span class="tool-icon">▤</span><strong>RAM Check</strong><small>Device info</small></button>
+        <button class="tool-card" data-view="calc"><span class="tool-icon">＋</span><strong>Calculator</strong><small>Quick math</small></button>
+        <button class="tool-card" data-view="time"><span class="tool-icon">◷</span><strong>Time tools</strong><small>Stopwatch & timer</small></button>
+        <button class="tool-card" data-view="qr"><span class="tool-icon">▦</span><strong>QR Generator</strong><small>Text & links</small></button>
+        <button class="tool-card" data-view="notes"><span class="tool-icon">▧</span><strong>Notes</strong><small>Saved locally</small></button>
+        <button class="tool-card" data-view="convert"><span class="tool-icon">⇄</span><strong>Converter</strong><small>Units & data</small></button>
+        <button class="tool-card" data-view="quests"><span class="tool-icon">⚔</span><strong>Quest Log</strong><small>XP & badges</small></button>
+        <button class="tool-card" data-view="photo"><span class="tool-icon">▣</span><strong>Photobooth</strong><small>Camera & filters</small></button>
+      </nav>
+
+      <section id="view-ram" class="view panel">
+        <div class="view-title"><div><span class="eyebrow">DEVICE SCANNER</span><h2>RAM Capacity Check</h2></div><span class="status-dot"></span></div>
+        <p class="muted">Memeriksa data yang secara resmi tersedia untuk halaman web ini.</p>
+        <div class="ram-result">
+          <div class="ram-symbol">▤</div>
+          <div><span class="eyebrow">SYSTEM RAM</span><h3 id="ramStatus">Memeriksa dukungan…</h3><p id="ramDetail" class="muted">Tidak ada angka yang akan ditebak.</p></div>
+        </div>
+        <div class="info-list">
+          <div><span>Hardware RAM total</span><strong id="ramTotal">Tidak tersedia</strong></div>
+          <div><span>RAM sistem terpakai</span><strong id="ramUsed">Tidak tersedia</strong></div>
+          <div><span>RAM sistem tersisa</span><strong id="ramFree">Tidak tersedia</strong></div>
+          <div><span>Browser memory API</span><strong id="heapStatus">Memeriksa…</strong></div>
+          <div><span>Resolusi layar</span><strong id="screenInfo">—</strong></div>
+          <div><span>Viewport halaman</span><strong id="viewportInfo">—</strong></div>
+        </div>
+        <div class="notice"><strong>Kenapa data RAM tidak muncul?</strong><p>Browser Android membatasi akses ke informasi memori sistem. Sebagian browser mungkin memberi perkiraan heap JavaScript, tetapi itu bukan total RAM fisik atau RAM bebas perangkat.</p></div>
+        <button id="ramQuestBtn" class="primary-btn">✓ Tandai pengecekan selesai <span>+10 XP</span></button>
+      </section>
+
+      <section id="view-calc" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">QUICK MATH</span><h2>Calculator</h2></div><span class="mini-tag">OFFLINE</span></div>
+        <div class="calc-display"><div id="calcHistory" class="muted"></div><output id="calcOutput">0</output></div>
+        <div class="calc-grid">
+          <button data-calc="clear" class="calc-fn">AC</button><button data-calc="back" class="calc-fn">⌫</button><button data-calc="%" class="calc-fn">%</button><button data-calc="/" class="calc-op">÷</button>
+          <button data-calc="7">7</button><button data-calc="8">8</button><button data-calc="9">9</button><button data-calc="*" class="calc-op">×</button>
+          <button data-calc="4">4</button><button data-calc="5">5</button><button data-calc="6">6</button><button data-calc="-" class="calc-op">−</button>
+          <button data-calc="1">1</button><button data-calc="2">2</button><button data-calc="3">3</button><button data-calc="+" class="calc-op">+</button>
+          <button data-calc="sign">+/−</button><button data-calc="0">0</button><button data-calc=".">.</button><button data-calc="=" class="calc-equals">=</button>
+        </div>
+        <button class="primary-btn quest-action" data-quest="calc">Selesaikan kalkulasi <span>+5 XP</span></button>
+      </section>
+
+      <section id="view-time" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">TIME TO FOCUS</span><h2>Time tools</h2></div><span class="mini-tag">OFFLINE</span></div>
+        <div class="segmented"><button class="seg-btn selected" data-time-mode="stopwatch">Stopwatch</button><button class="seg-btn" data-time-mode="timer">Timer</button></div>
+        <div id="stopwatchPane">
+          <div id="stopwatchDisplay" class="time-display">00:00.00</div>
+          <div class="button-row"><button id="swStart" class="primary-btn">▶ Start</button><button id="swLap" class="secondary-btn">Lap</button><button id="swReset" class="secondary-btn">Reset</button></div>
+          <ol id="lapList" class="lap-list"></ol>
+        </div>
+        <div id="timerPane" class="hidden">
+          <div class="timer-inputs"><label>Menit<input id="timerMinutes" type="number" min="0" max="999" value="1" inputmode="numeric"></label><label>Detik<input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></label></div>
+          <div id="timerDisplay" class="time-display">01:00</div>
+          <div class="button-row"><button id="timerStart" class="primary-btn">▶ Mulai timer</button><button id="timerReset" class="secondary-btn">Reset</button></div>
+          <p id="timerMessage" class="muted tiny">Biarkan halaman tetap terbuka agar timer berjalan lebih konsisten.</p>
+        </div>
+        <button class="primary-btn quest-action" data-quest="time">Selesaikan latihan waktu <span>+5 XP</span></button>
+      </section>
+
+      <section id="view-qr" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">QUICK SHARE</span><h2>QR Generator</h2></div><span class="mini-tag">QR</span></div>
+        <label class="field-label" for="qrInput">Teks atau URL</label>
+        <textarea id="qrInput" rows="3" placeholder="Contoh: https://example.com"></textarea>
+        <p class="muted tiny">Pembuatan QR memakai layanan web; koneksi internet diperlukan. Jangan masukkan password atau data rahasia.</p>
+        <button id="qrGenerate" class="primary-btn">Generate QR Code</button>
+        <div id="qrOutput" class="qr-output hidden"><img id="qrImage" alt="QR Code hasil generasi"><p id="qrCaption" class="muted tiny"></p><a id="qrOpen" target="_blank" rel="noopener">Buka gambar QR</a></div>
+        <button class="primary-btn quest-action" data-quest="qr">Selesaikan QR quest <span>+5 XP</span></button>
+      </section>
+
+      <section id="view-notes" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">FIELD JOURNAL</span><h2>Notes</h2></div><span class="mini-tag">LOCAL</span></div>
+        <input id="noteTitle" type="text" maxlength="80" placeholder="Judul catatan">
+        <textarea id="noteBody" rows="4" maxlength="5000" placeholder="Tulis ide atau catatanmu…"></textarea>
+        <div class="button-row"><button id="saveNote" class="primary-btn">Simpan catatan</button><button id="cancelNote" class="secondary-btn hidden">Batal edit</button></div>
+        <p class="muted tiny">Catatan disimpan di browser perangkat ini. Menghapus data browser dapat menghapus catatan.</p>
+        <div id="notesList" class="notes-list"></div>
+        <button class="primary-btn quest-action" data-quest="notes">Selesaikan journal quest <span>+5 XP</span></button>
+      </section>
+
+      <section id="view-convert" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">UNIT ALCHEMY</span><h2>Unit Converter</h2></div><span class="mini-tag">OFFLINE</span></div>
+        <label class="field-label" for="convertCategory">Kategori</label>
+        <select id="convertCategory"><option value="length">Panjang</option><option value="weight">Berat</option><option value="temperature">Suhu</option><option value="data">Kapasitas data</option></select>
+        <div class="converter-grid"><label>Nilai<input id="convertValue" type="number" value="1" step="any" inputmode="decimal"></label><label>Dari<select id="convertFrom"></select></label><label>Ke<select id="convertTo"></select></label></div>
+        <div class="convert-result"><span class="eyebrow">HASIL KONVERSI</span><output id="convertOutput">—</output></div>
+        <button class="primary-btn quest-action" data-quest="convert">Selesaikan alchemy quest <span>+5 XP</span></button>
+      </section>
+
+      <section id="view-photo" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">CREATIVE STUDIO</span><h2>Photobooth</h2></div><span class="mini-tag">10 SHOTS / DAY</span></div>
+        <p class="muted">Ambil foto dari kamera perangkat, coba filter, lalu simpan hasilnya. Kamera hanya aktif setelah lu menekan tombol mulai.</p>
+        <div class="photo-stage">
+          <video id="photoVideo" autoplay playsinline muted aria-label="Pratinjau kamera"></video>
+          <div id="photoPlaceholder" class="photo-placeholder"><span>▣</span><strong>Kamera belum aktif</strong><small>Tekan “Aktifkan kamera” dan izinkan akses kamera.</small></div>
+        </div>
+        <div class="photo-controls">
+          <button id="photoStart" class="primary-btn">Aktifkan kamera</button>
+          <button id="photoFlip" class="secondary-btn" disabled>Ganti kamera</button>
+          <button id="photoStop" class="secondary-btn" disabled>Matikan</button>
+        </div>
+        <label class="field-label" for="photoFilter">Filter</label>
+        <div class="filter-grid" id="photoFilters">
+          <button class="filter-chip selected" data-filter="normal">Normal</button>
+          <button class="filter-chip" data-filter="mono">Mono</button>
+          <button class="filter-chip" data-filter="warm">Warm</button>
+          <button class="filter-chip" data-filter="cool">Cool</button>
+          <button class="filter-chip" data-filter="retro">Retro</button>
+          <button class="filter-chip" data-filter="dream">Dream</button>
+        </div>
+        <div class="photo-usage">
+          <div><span class="eyebrow">DAILY SHOTS</span><strong id="photoUsage">0 / 10</strong></div>
+          <div class="photo-meter"><div id="photoUsageBar"></div></div>
+          <p id="photoLimitMessage" class="muted tiny">Sisa 10 jepretan hari ini.</p>
+        </div>
+        <div class="photo-actions">
+          <button id="photoCapture" class="primary-btn" disabled>◎ Ambil foto</button>
+          <button id="photoBuyMore" class="secondary-btn">Tukar 50 XP → +5 jepretan</button>
+        </div>
+        <p class="muted tiny">Limit tersimpan di browser perangkat ini. Tukar XP bukan quest dan bisa dilakukan lagi selama XP mencukupi. Foto diproses di perangkat; tidak diunggah oleh fitur ini.</p>
+        <canvas id="photoCanvas" class="hidden"></canvas>
+        <div id="photoResult" class="photo-result hidden">
+          <h3>Foto terakhir</h3>
+          <img id="photoResultImage" alt="Foto hasil photobooth">
+          <div class="button-row"><a id="photoDownload" class="download-link" download="pocket-photobooth.png">Simpan foto</a><button id="photoClear" class="secondary-btn">Hapus pratinjau</button></div>
+        </div>
+      </section>
+
+      <section id="view-quests" class="view panel hidden">
+        <div class="view-title"><div><span class="eyebrow">ADVENTURE LOG</span><h2>Quest & achievements</h2></div><span class="mini-tag">XP</span></div>
+        <p class="muted">XP didapat dari penggunaan fitur dan menyelesaikan quest. Setiap quest hanya memberi XP sekali per hari.</p>
+        <div id="questList" class="quest-list"></div>
+        <h3 class="subheading">Achievements</h3>
+        <div id="achievementList" class="achievement-grid"></div>
+        <button id="resetProgress" class="danger-btn">Reset semua progress RPG</button>
+      </section>
+      <footer><span>POCKET TOOLKIT RPG</span><span>Built for everyday quests ✦</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
